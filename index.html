@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>YOUR NAME HERE</title>
+  <script>
+    (function() {
+      if ((window.location.host === 'localhost:8080' && -1 !== window.location.search.indexOf('renderCritical')) || window.location.host !== 'localhost:8080') {
+        var style = document.createElement('style')
+        style.innerHTML = ''
+        document.getElementsByTagName('head')[0].appendChild(style)
+      }
+    }())
+  </script>
+  <noscript>
+    <style></style>
+  </noscript>
+</head>
+<body>
+  <div id="app"><div class="core__wrapper___P3Bpq"><div class="core__wrapperInner___1Ad5x"><div><h1>YOUR NAME HERE</h1><div><p>Hi. Here is some homepage intro text.</p> </div><h2 class="core__homePostTitleWrapper___F9s3C"><span style="font-weight:400;">Latest post</span>: <a class="core__homePostTitle___2jlWG" href="hello-world">&quot;Hello, World\!&quot;</a></h2></div></div></div></div>
+  <script>
+    (function() {
+      var script = document.createElement('script');
+      script.src = document.baseURI.indexOf('localhost:8080') !== -1
+        ? 'http://localhost:8080/app.bundle.js'
+        : '/app.bundle.js';
+      document.body.appendChild(script);
+    }())
+  </script>
+</body>
+</html>

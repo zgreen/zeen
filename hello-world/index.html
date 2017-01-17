@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>YOUR NAME HERE</title>
+  <script>
+    (function() {
+      if ((window.location.host === 'localhost:8080' && -1 !== window.location.search.indexOf('renderCritical')) || window.location.host !== 'localhost:8080') {
+        var style = document.createElement('style')
+        style.innerHTML = ''
+        document.getElementsByTagName('head')[0].appendChild(style)
+      }
+    }())
+  </script>
+  <noscript>
+    <style></style>
+  </noscript>
+</head>
+<body>
+  <div id="app"><div class="core__wrapper___P3Bpq"><div class="core__wrapperInner___1Ad5x"><div><small rel="author"><a style="color:inherit;" href="/">YOUR NAME HERE</a></small><article><h1 id=hello-world->Hello, World!</h1> <p> <time datetime=2017-01-17T01:37:56.127Z>1/16/2017</time></p> </article></div></div></div></div>
+  <script>
+    (function() {
+      var script = document.createElement('script');
+      script.src = document.baseURI.indexOf('localhost:8080') !== -1
+        ? 'http://localhost:8080/app.bundle.js'
+        : '/app.bundle.js';
+      document.body.appendChild(script);
+    }())
+  </script>
+</body>
+</html>
