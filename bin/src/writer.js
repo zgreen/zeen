@@ -1,7 +1,6 @@
 import help from './help'
 import curPosts from '../../src/posts.json'
 const fs = require('fs')
-const path = require('path')
 const chalk = require('chalk')
 const args = Object.assign(
   {},
@@ -9,7 +8,7 @@ const args = Object.assign(
   require('minimist')(process.argv.slice(2))
 )
 
-export default function (build = false) {
+export default function () {
   // Bail if no title
   if (!args.title) {
     console.error(chalk.red(
@@ -25,7 +24,18 @@ export default function (build = false) {
     .replace(/^-|-$/g, '')
   const postedDate = new Date()
 
-  function writeMarkdownPost() {
+  function promiser (func) {
+    return new Promise((resolve, reject) => {
+      const writer = func()
+      if (writer) {
+        reject(writer)
+      } else {
+        resolve(writer)
+      }
+    })
+  }
+
+  function writeMarkdownPost () {
     fs.writeFile(
       `src/posts/${slug}.md`,
       `# ${args.title}
@@ -41,26 +51,26 @@ export default function (build = false) {
     )
   }
 
-  function writePostsJSON(update, title, publish) {
+  function writePostsJSON (update, title, publish) {
     const posts = update
       ? curPosts.reduce((init, cur, idx) => {
-          if (cur.slug === update) {
-            cur = Object.assign({}, cur, { title })
-            if (cur.isDraft && publish) {
-              cur.isDraft = false
-            }
+        if (cur.slug === update) {
+          cur = Object.assign({}, cur, { title })
+          if (cur.isDraft && publish) {
+            cur.isDraft = false
           }
-          init.push(cur)
-          return init
-        }, [])
+        }
+        init.push(cur)
+        return init
+      }, [])
       : curPosts.concat(
-          {
-            isDraft: args.draft,
-            postedDate,
-            slug,
-            title: args.title
-          }
-        )
+        {
+          isDraft: args.draft,
+          postedDate,
+          slug,
+          title: args.title
+        }
+      )
     fs.writeFile(
       `src/posts.json`,
       JSON.stringify(posts),
@@ -88,16 +98,6 @@ export default function (build = false) {
       ))
       break
     default:
-      function promiser(func) {
-        return new Promise((resolve, reject) => {
-          const writer = func()
-          if (writer) {
-            reject(writer)
-          } else {
-            resolve(writer)
-          }
-        })
-      }
       const writePost = promiser(writeMarkdownPost)
       const logPost = promiser(writePostsJSON)
       writePost
@@ -105,16 +105,5 @@ export default function (build = false) {
         .then(console.log(chalk.green(
           `Post: "${args.title}" successfully written and logged.`
         )))
-      if (deploy) {
-        const spawn = require('child_process').spawn
-        const build = spawn('npm', ['run', 'build'])
-        build.stdout.on('data', (data) => {
-          console.log(data);
-        })
-        build.stderr.on('data', (data) => {
-          console.error(data);
-          process.exit(1)
-        })
-      }
   }
 }

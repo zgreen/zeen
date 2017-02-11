@@ -13,7 +13,8 @@
     "start": "webpack-dev-server --config webpack.config.js --content-base --hot --inline",
     "build": "webpack --config webpack.config.js --devtool source-map --output-pathinfo -p",
     "post": "./node_modules/.bin/babel-node ./bin/index.js",
-    "zeen-build": "webpack --config bin/webpack.config.js --devtool source-map --output-pathinfo -p && ./bin/postBuild.js"
+    "zeen-build": "webpack --config bin/webpack.config.js --devtool source-map --output-pathinfo -p && ./bin/postBuild.js",
+    "zeen-start": "webpack --config bin/webpack.config.js --devtool source-map --output-pathinfo -d --watch && ./bin/postBuild.js"
   },
   "author": "Zach Green",
   "license": "MIT",
