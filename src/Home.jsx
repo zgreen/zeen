@@ -5,10 +5,6 @@ import posts from './posts.json'
 import { Link } from 'react-router'
 const homepage = { __html: require('./homepage.md') }
 
-if (!IS_PRODUCTION) { // eslint-disable-line no-undef
-  const css = require('./core.css') // eslint-disable-line no-unused-vars
-}
-
 const latestPostObj = posts
   .filter((post) => !post.isDraft)
   .sort((a, b) => {

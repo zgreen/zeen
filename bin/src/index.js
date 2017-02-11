@@ -4,7 +4,7 @@ import deletePost from './deletePost'
 const args = require('minimist')(process.argv.slice(2))
 
 switch (args._[0]) {
-  case 'deploy':
+  case 'build':
     writer(true)
     break
   case 'post':

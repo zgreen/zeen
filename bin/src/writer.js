@@ -8,7 +8,8 @@ const args = Object.assign(
   { draft: false },
   require('minimist')(process.argv.slice(2))
 )
-export default function (deploy = false) {
+
+export default function (build = false) {
   // Bail if no title
   if (!args.title) {
     console.error(chalk.red(
@@ -77,7 +78,6 @@ export default function (deploy = false) {
     postExists: curPosts.map((post) => post.slug).indexOf(slug) !== -1,
     default: true
   }
-  const terminal = require('child_process').spawn('bash')
   switch (Object.keys(cases).filter((curCase) => cases[curCase])[0]) {
     case 'update':
       writePostsJSON(args.update, args.title, args.publish)
@@ -106,9 +106,15 @@ export default function (deploy = false) {
           `Post: "${args.title}" successfully written and logged.`
         )))
       if (deploy) {
-        console.log('go deploy')
-        terminal.stdin.write('npm run build')
-        terminal.stdin.end()
+        const spawn = require('child_process').spawn
+        const build = spawn('npm', ['run', 'build'])
+        build.stdout.on('data', (data) => {
+          console.log(data);
+        })
+        build.stderr.on('data', (data) => {
+          console.error(data);
+          process.exit(1)
+        })
       }
   }
 }

@@ -1,9 +1,6 @@
+import '!!css!postcss!./core.css'
 import React from 'react'
 import styles from './core.css.json'
-
-if (!IS_PRODUCTION) { // eslint-disable-line no-undef
-  const css = require('./core.css') // eslint-disable-line no-unused-vars
-}
 
 class Main extends React.Component {
   render () {

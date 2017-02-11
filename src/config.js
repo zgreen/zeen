@@ -1,3 +1,4 @@
 export default {
-  siteName: 'YOUR NAME HERE'
+  siteName: 'YOUR NAME HERE',
+  renderCriticalLocally: true
 }
