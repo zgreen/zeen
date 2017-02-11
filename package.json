@@ -6,6 +6,19 @@
   "engines": {
     "node": ">= 6.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zgreen/zeen"
+  },
+  "keywords": [
+    "static site builder",
+    "static site",
+    "static",
+    "react",
+    "node",
+    "webpack",
+    "markdown"
+  ],
   "description": "A static site generator powered by webpack, React, and Markdown",
   "version": "0.1.0",
   "main": "index.js",
